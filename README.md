@@ -201,20 +201,20 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 1. Open the `app_router.dart` file and set up the navigation bar routing according to your preferences in the routes list within the ShellRoute class.
 
 ```dart
-        ShellRoute(
-          navigatorKey: _shellNavigatorKey,
-          pageBuilder: (context, state, child) {
-            return NoTransitionPage(
-              child: Navigation(
-                location: state.location,
-                child: child,
-              ),
-            );
-          },
-          routes: [
-            // ADD ROUTES HERE
-          ],
-        ),
+    ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        pageBuilder: (context, state, child) {
+        return NoTransitionPage(
+            child: Navigation(
+            location: state.location,
+            child: child,
+          ),
+        );
+      },
+      routes: [
+        // ADD ROUTES HERE
+       ],
+    ),
 ```
 
 2. In the `constants.dart` file, define the NavigateName and NavigatePath constants to configure the GoRoute name and path parameters.
