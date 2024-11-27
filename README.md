@@ -181,12 +181,14 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 
 ```xml
 ...
+
 <key>CFBundleLocalizations</key>
 <array>
 	<string>en</string>
 	<string>es</string>
 </array>
-    ...
+
+...
 ```
 
 ## Configure Theme
