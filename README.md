@@ -63,14 +63,16 @@ In this project, [MVVM](https://medium.com/flutterworld/flutter-mvvm-architectur
 - One ViewModel class may serve multiple View classes. (ensuring Extensibility and Maintainability)
 - `lib/app/viewmodel/base_view_model.dart` class is provided to unified common action required, eg: notify() and more.
 - New ViewModel classes should extends BaseViewModel to inherit the basic unified features included.
-   ```dart
-   class LoginViewModel extends BaseViewModel {
-      Future<void> login(String username, String password) async {
-        notify(MyResponse.loading());
-        response = await UserRepository().login(username, password);
-        notify(response);
-      }
-
+    ```dart
+    class LoginViewModel extends BaseViewModel {
+        Future<void> login(String username, String password) async {
+            notify(MyResponse.loading());
+            response = await UserRepository().login(username, password);
+            notify(response);
+        }
+    }
+    ```
+    
 ### Repository
 
 - Repository class is defining the business logic for accessing data source, eg: getting data from multiple source and compiled as one data type before passing back to ViewModel.
