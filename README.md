@@ -72,7 +72,7 @@ In this project, [MVVM](https://medium.com/flutterworld/flutter-mvvm-architectur
         }
     }
     ```
-    
+
 ### Repository
 
 - Repository class is defining the business logic for accessing data source, eg: getting data from multiple source and compiled as one data type before passing back to ViewModel.
@@ -112,7 +112,7 @@ Core concepts in Provider:
 
 ### Using the Provider
 
-1. To simplified and standardize the usage of Provider in this project, a base class, base_view_model.dart is provided which extending the ChangeNotifier and include common functions/fields required. (eg: notify(), notifyUrgent() and more)
+1. To simplified and standardize the usage of Provider in this project, a base class, base_view_model.dart is provided which extending the ChangeNotifier and include common functions/fields required. (eg: notify() and more)
 2. ChangeNotifierProviders are implemented in the top inheritance level of the project (app.dart) which using MultiProvider to support multiple providers within the project.
 3. For any new ViewModel class/Provider, please register in the `lib/app/asset/app_options.dart`
 ```dart
