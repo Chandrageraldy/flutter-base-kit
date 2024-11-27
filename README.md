@@ -2,7 +2,7 @@
 
 This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) file for details.
 
-A Flutter Starter Kit using [MVVM](https://medium.com/flutterworld/) Design Architecture.
+A Flutter Starter Kit using [MVVM](https://medium.com/flutterworld/flutter-mvvm-architecture-f8bed2521958) Design Architecture.
 
 ## Getting Started 🚀
 
@@ -10,8 +10,9 @@ This project is a starting point for a Flutter application.
 
 Here are some resources to help you better understand and get started with the Flutter Starter Kit:
 
-- [State Management: provider](https://pub.dev/packages/provider)
-- [Loading Library: flutter_easyloading](https://pub.dev/packages/flutter_easyloading/versions)
+- [State Management Package: provider](https://pub.dev/packages/provider)
+- [Loading Package: flutter_easyloading](https://pub.dev/packages/flutter_easyloading/versions)
+- [Routing Package: go_router](https://pub.dev/packages/go_router)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
@@ -19,7 +20,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Project Architecture Pattern (MVVM)
 
-In this project, [MVVM](https://medium.com/flutterworld/), aka Model-View-ViewModel is adapted as the base project architecture pattern.
+In this project, [MVVM](https://medium.com/flutterworld/flutter-mvvm-architecture-f8bed2521958), aka Model-View-ViewModel is adapted as the base project architecture pattern.
 
 ```
 ├── app
@@ -41,7 +42,7 @@ In this project, [MVVM](https://medium.com/flutterworld/), aka Model-View-ViewMo
 
 ### Model
 
-1. Model data class is defining the structure of data to be used
+* The model data class defines the format or structure for the data to be utilized.
     ```dart
     class TokenModel {
 
@@ -54,7 +55,7 @@ In this project, [MVVM](https://medium.com/flutterworld/), aka Model-View-ViewMo
 
 ### View
 
-1. View layer are the presentation layer, where include all the UI classes, eg: Widgets, Pages
+* View layer are the presentation layer, where include all the UI classes, eg: Widgets, Pages
 
 ### ViewModel
 
