@@ -164,19 +164,16 @@ Here are some resources to help you better understand and get started with the f
 2. Define the new key/value localization pair, adhering to the required format.
 3. Generate updated localization files by running the `flutter gen-l10n` command.
 4. Access the localization in the app by using context.l10n.{your localization variable}.
-5. For testing, set the locale in `app.dart` by using the Locale('your language code') format.
-
-import 'package:my.com.fn.fraseriansapp/l10n/l10n.dart';
 
 ```dart
-import 'package:boilerplate_starter_kit/l10n/l10n.dart';
-
 @override
 Widget build(BuildContext context) {
   final l10n = context.l10n;
   return Text(l10n.helloWorld);
 }
 ```
+
+5. For testing different locales, set the locale in `app.dart` by using the Locale('your language code') format.
 
 ### Adding Supported Locales
 
