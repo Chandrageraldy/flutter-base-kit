@@ -1,16 +1,209 @@
-# flutter_base_kit
+## FLUTTER STARTER KIT
 
-A new Flutter project.
+This project is licensed under the MIT License - see the [LICENSE](https://opensource.org/licenses/MIT) file for details.
 
-## Getting Started
+A Flutter Starter Kit using [MVVM](https://medium.com/flutterworld/) Design Architecture.
+
+## Getting Started 🚀
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Here are some resources to help you better understand and get started with the Flutter Starter Kit:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [State Management: provider](https://pub.dev/packages/provider)
+- [Loading Library: flutter_easyloading](https://pub.dev/packages/flutter_easyloading/versions)
 
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Project Architecture Pattern (MVVM)
+
+In this project, [MVVM](https://medium.com/flutterworld/), aka Model-View-ViewModel is adapted as the base project architecture pattern.
+
+```
+├── app
+│   ├── model
+│   │   ├── ...
+│   ├── view
+│   │   ├── ...
+│   ├── viewmodel
+│   │   ├── ...
+│   ├── repository
+│   │   ├── ...
+│   ├── services
+│   │   ├── ...
+│   ├── assets
+│   │   ├── ...
+│   ├── utils
+│   │   ├── ...
+```
+
+### Model
+
+1. Model data class is defining the structure of data to be used
+    ```dart
+    class TokenModel {
+
+      TokenModel({this.accessToken, this.refreshToken});
+
+      String? accessToken;
+      String? refreshToken;
+    }
+    ```
+
+### View
+
+1. View layer are the presentation layer, where include all the UI classes, eg: Widgets, Pages
+
+### ViewModel
+
+1. ViewModel class as a connector between View and Model, separating View and Model to segregate business logic from UI, by accepting all request from View and perform related request through Model Layer.
+2. One ViewModel class may serve multiple View classes. (ensuring Extensibility and Maintainability)
+3. `lib/app/viewmodel/base_view_model.dart` class is provided to unified common action required, eg: notify() and more.
+4. New ViewModel classes should extends BaseViewModel to inherit the basic unified features included.
+   ```dart
+   class LoginViewModel extends BaseViewModel {
+      Future<void> login(String username, String password) async {
+        notify(MyResponse.loading());
+        response = await UserRepository().login(username, password);
+        notify(response);
+      }
+
+### Repository
+
+1. Repository class is defining the business logic for accessing data source, eg: getting data from multiple source and compiled as one data type before passing back to ViewModel.
+
+### Services
+
+1. `lib/app/service/base_services.dart` is provided to unified the api request instance, including user authentication
+
+### Assets and Utils
+
+1. The `assets` folder contains files related to the app's static resources, such as configuration files, application settings, and any other non-code resources required by the app.
+2. The `utils` folder contains utility classes or helper functions that provide common functionality used across the app. These utility classes are not tied to a specific feature but are generic tools used in various parts of the app. They help avoid code duplication and improve the maintainability of the project.
+
+## Response Model
+
+The Response model is designed to represent the different states of a network request in a clean and consistent way. It helps manage and encapsulate the data, error, and loading states in a way that can be used throughout the repository and view model layers of your application.
+
+In this model, T represents the type of data returned from a network request (e.g., User, Product, etc.), and V represents the type of error that might be encountered (e.g., String, ErrorModel, etc.).
+
+- data (T?)
+Holds the data returned from the network request. This is only populated in the COMPLETE state.
+- error (V?)
+Holds the error information if the request failed. This is only populated in the ERROR state.
+- status (ResponseStatus)
+The current status of the request. This can be one of the following:
+- ResponseStatus.INITIAL (before the request starts)
+- ResponseStatus.LOADING (while the request is in progress)
+- ResponseStatus.COMPLETE (when the request has finished successfully)
+- ResponseStatus.ERROR (when an error occurs during the request)
+
+## State Management Library
+
+This project relies on [Provider] which will be taking the [Flutter App State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/simple) as base reference. [Provider] is use along with MVVM architectural pattern to provide better separation and management within the project.
+
+Core concepts in [Provider]:
+- [ChangeNotifier](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html)
+- [Context.read, select, and watch](https://medium.com/@soojlee0701/how-to-use-provider-context-read-watch-and-select-1e41938fdf62)
+- [Consumer](https://docs.flutter.dev/data-and-backend/state-mgmt/simple)
+- [NotifyListeners](https://api.flutter.dev/flutter/foundation/ChangeNotifier/notifyListeners.html)
+
+### Using the Provider
+
+1. To simplified and standardize the usage of Provider in this project, a base class, base_view_model.dart is provided which extending the ChangeNotifier and include common functions/fields required. (eg: notify(), notifyUrgent() and more)
+2. ChangeNotifierProviders are implemented in the top inheritance level of the project (app.dart) which using MultiProvider to support multiple providers within the project.
+3. For any new ViewModel class/Provider, please register in the `lib/app/asset/app_options.dart`
+```dart
+List<SingleChildWidget> providerAssets() => [
+  ChangeNotifierProvider.value(value: BaseViewModel()),
+  ChangeNotifierProvider.value(value: LocaleViewModel())
+];
+```
+4. To access provider values:
+```dart
+context.select((ViewModel vm) => vm.properties);
+```
+5. To access provider without listening for changes:
+```dart
+context.read<ViewModel>().method()
+```
+
+## Adding Supported Locales
+
+Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info.plist` to include the new locale.
+
+```xml
+    ...
+
+    <key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>es</string>
+	</array>
+
+    ...
+```
+
+## Configure Routing
+
+This Starter Kit utilizes the [go_router](https://pub.dev/packages/go_router) package to handle routing
+
+Here are some resources to help you better understand and get started with the go_router package:
+
+- [Tutorial: Get Started with go_router](https://www.youtube.com/watch?v=BgcXHA3EHJU&t=519s)
+
+1. Open the `app_router.dart` file and set up `routerConfiguration()` by adding routes in the routes list
+2. In the `constants.dart` file, define the NavigateName and NavigatePath constants to configure the GoRoute name and path parameters.
+3. Update the page builder's child to display the desired page.
+4. Follow tutorial listed above to pass in parameters with go_router package.
+5. Follow [Go Router Navigation Doc](https://pub.dev/documentation/go_router/latest/topics/Navigation-topic.html) to navigate between destinations in app.
+
+## Configure Localizations
+
+This Starter Kit relies on [flutter_localizations](https://pub.dev/packages/flutter_localization) and follows the [official internationalization guide for Flutter][https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization].
+
+Here are some resources to help you better understand and get started with the flutter_localizations package:
+
+- [Tutorial: Get Started with flutter_localizations](https://www.youtube.com/watch?v=YPXbesBx9is)
+
+1. Open the relevant .arb file in the l10n folder, or create a new one for the desired locale.
+
+```
+├── l10n
+│   ├── arb
+│   │   ├── app_en.arb
+│   │   └── app_id.arb
+```
+
+2. Define the new key/value localization pair, adhering to the required format.
+3. Generate updated localization files by running the `flutter gen-l10n` command.
+4. Access the localization in the app by using context.l10n.{your localization variable}.
+5. For testing, set the locale in `app.dart` by using the Locale('your language code') format.
+
+import 'package:my.com.fn.fraseriansapp/l10n/l10n.dart';
+
+```dart
+import 'package:boilerplate_starter_kit/l10n/l10n.dart';
+
+@override
+Widget build(BuildContext context) {
+  final l10n = context.l10n;
+  return Text(l10n.helloWorld);
+}
+```
+
+## Configure Theme
+
+1. Define the colors in `color_manager.dart`.
+2. Set up the theme colors in `theme_manager.dart`.
+
+## Configure Navigation Bar
+
+1. Open the `app_router.dart` file and set up the navigation bar routing according to your preferences in the routes list within the ShellRoute class.
+2. In the `constants.dart` file, define the NavigateName and NavigatePath constants to configure the GoRoute name and path parameters.
+3. Update the page builder's child to display the desired page.
+4. Open `navigation.dart` and modify the navBarItems list to add or remove items from the navigation bar.
+5. Set the icon, label, and initial location for each navigation bar item.
+6. Adjust the navigation bar's styles within the scaffold, set up the logic for the current index and modify the NavigatorRouteItem constant based on the navigation item count.
