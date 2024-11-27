@@ -97,7 +97,7 @@ In this model, T represents the type of data returned from a network request (e.
 - status (ResponseStatus): The current status of the request. This can be one of the following:
 
 ```dart
-    enum ResponseStatus { INITIAL, COMPLETE, ERROR, LOADING }
+enum ResponseStatus { INITIAL, COMPLETE, ERROR, LOADING }
 ```
 
 ## State Management Library
@@ -180,14 +180,12 @@ Widget build(BuildContext context) {
 Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info.plist` to include the new locale.
 
 ```xml
-    ...
-
-    <key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>es</string>
-	</array>
-
+...
+<key>CFBundleLocalizations</key>
+<array>
+	<string>en</string>
+	<string>es</string>
+</array>
     ...
 ```
 
@@ -201,20 +199,20 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 1. Open the `app_router.dart` file and set up the navigation bar routing according to your preferences in the routes list within the ShellRoute class.
 
 ```dart
-    ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        pageBuilder: (context, state, child) {
-        return NoTransitionPage(
-            child: Navigation(
-            location: state.location,
-            child: child,
-          ),
-        );
-      },
-      routes: [
-        // ADD ROUTES HERE
-       ],
-    ),
+ShellRoute(
+    navigatorKey: _shellNavigatorKey,
+    pageBuilder: (context, state, child) {
+    return NoTransitionPage(
+        child: Navigation(
+        location: state.location,
+        child: child,
+      ),
+    );
+  },
+  routes: [
+    // ADD ROUTES HERE
+   ],
+),
 ```
 
 2. In the `constants.dart` file, define the NavigateName and NavigatePath constants to configure the GoRoute name and path parameters.
