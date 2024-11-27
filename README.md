@@ -42,7 +42,7 @@ In this project, [MVVM](https://medium.com/flutterworld/flutter-mvvm-architectur
 
 ### Model
 
-* The model data class defines the format or structure for the data to be utilized.
+- The model data class defines the format or structure for the data to be utilized.
     ```dart
     class TokenModel {
 
@@ -55,14 +55,14 @@ In this project, [MVVM](https://medium.com/flutterworld/flutter-mvvm-architectur
 
 ### View
 
-* View layer are the presentation layer, where include all the UI classes, eg: Widgets and Pages.
+- View layer are the presentation layer, where include all the UI classes, eg: Widgets and Pages.
 
 ### ViewModel
 
-* ViewModel class as a connector between View and Model, separating View and Model to segregate business logic from UI, by accepting all request from View and perform related request through Model Layer.
-* One ViewModel class may serve multiple View classes. (ensuring Extensibility and Maintainability)
-* `lib/app/viewmodel/base_view_model.dart` class is provided to unified common action required, eg: notify() and more.
-* New ViewModel classes should extends BaseViewModel to inherit the basic unified features included.
+- ViewModel class as a connector between View and Model, separating View and Model to segregate business logic from UI, by accepting all request from View and perform related request through Model Layer.
+- One ViewModel class may serve multiple View classes. (ensuring Extensibility and Maintainability)
+- `lib/app/viewmodel/base_view_model.dart` class is provided to unified common action required, eg: notify() and more.
+- New ViewModel classes should extends BaseViewModel to inherit the basic unified features included.
    ```dart
    class LoginViewModel extends BaseViewModel {
       Future<void> login(String username, String password) async {
@@ -73,16 +73,16 @@ In this project, [MVVM](https://medium.com/flutterworld/flutter-mvvm-architectur
 
 ### Repository
 
-* Repository class is defining the business logic for accessing data source, eg: getting data from multiple source and compiled as one data type before passing back to ViewModel.
+- Repository class is defining the business logic for accessing data source, eg: getting data from multiple source and compiled as one data type before passing back to ViewModel.
 
 ### Services
 
-* `lib/app/service/base_services.dart` is provided to unified the api request instance, including user authentication
+- `lib/app/service/base_services.dart` is provided to unified the api request instance, including user authentication
 
 ### Assets and Utils
 
-* The `assets` folder contains files related to the app's static resources, such as configuration files, application settings, and any other non-code resources required by the app.
-* The `utils` folder contains utility classes or helper functions that provide common functionality used across the app. These utility classes are not tied to a specific feature but are generic tools used in various parts of the app. They help avoid code duplication and improve the maintainability of the project.
+- The `assets` folder contains files related to the app's static resources, such as configuration files, application settings, and any other non-code resources required by the app.
+- The `utils` folder contains utility classes or helper functions that provide common functionality used across the app. These utility classes are not tied to a specific feature but are generic tools used in various parts of the app. They help avoid code duplication and improve the maintainability of the project.
 
 ## Response Model
 
@@ -90,16 +90,13 @@ The Response model is designed to represent the different states of a network re
 
 In this model, T represents the type of data returned from a network request (e.g., User, Product, etc.), and V represents the type of error that might be encountered (e.g., String, ErrorModel, etc.).
 
-* data (T?)
-Holds the data returned from the network request. This is only populated in the COMPLETE state.
-* error (V?)
-Holds the error information if the request failed. This is only populated in the ERROR state.
-* status (ResponseStatus)
-The current status of the request. This can be one of the following:
-- ResponseStatus.INITIAL (before the request starts)
-- ResponseStatus.LOADING (while the request is in progress)
-- ResponseStatus.COMPLETE (when the request has finished successfully)
-- ResponseStatus.ERROR (when an error occurs during the request)
+- data (T?): Holds the data returned from the network request. This is only populated in the COMPLETE state.
+- error (V?): Holds the error information if the request failed. This is only populated in the ERROR state.
+- status (ResponseStatus): The current status of the request. This can be one of the following:
+
+```dart
+    enum ResponseStatus { INITIAL, COMPLETE, ERROR, LOADING }
+```
 
 ## State Management Library
 
