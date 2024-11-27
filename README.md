@@ -144,7 +144,7 @@ Here are some resources to help you better understand and get started with the g
 
 ## Configure Localizations
 
-This Starter Kit relies on [flutter_localizations](https://pub.dev/packages/flutter_localization) and follows the [official internationalization guide for Flutter][https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization].
+This Starter Kit relies on [flutter_localizations](https://pub.dev/packages/flutter_localization) and follows the [official internationalization guide for Flutter](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization).
 
 Here are some resources to help you better understand and get started with the flutter_localizations package:
 
