@@ -100,9 +100,9 @@ In this model, T represents the type of data returned from a network request (e.
 
 ## State Management Library
 
-This project relies on [Provider] which will be taking the [Flutter App State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/simple) as base reference. [Provider] is use along with MVVM architectural pattern to provide better separation and management within the project.
+This project relies on [Provider](https://pub.dev/packages/provider) which will be taking the [Flutter App State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/simple) as base reference. Provider is use along with MVVM architectural pattern to provide better separation and management within the project.
 
-Core concepts in [Provider]:
+Core concepts in Provider:
 - [ChangeNotifier](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html)
 - [Context.read, select, and watch](https://medium.com/@soojlee0701/how-to-use-provider-context-read-watch-and-select-1e41938fdf62)
 - [Consumer](https://docs.flutter.dev/data-and-backend/state-mgmt/simple)
@@ -126,22 +126,6 @@ context.select((ViewModel vm) => vm.properties);
 5. To access provider without listening for changes:
 ```dart
 context.read<ViewModel>().method()
-```
-
-## Adding Supported Locales
-
-Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info.plist` to include the new locale.
-
-```xml
-    ...
-
-    <key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>es</string>
-	</array>
-
-    ...
 ```
 
 ## Configure Routing
@@ -190,6 +174,22 @@ Widget build(BuildContext context) {
   final l10n = context.l10n;
   return Text(l10n.helloWorld);
 }
+```
+
+### Adding Supported Locales
+
+Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info.plist` to include the new locale.
+
+```xml
+    ...
+
+    <key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>es</string>
+	</array>
+
+    ...
 ```
 
 ## Configure Theme
