@@ -25,7 +25,6 @@ class ThemeViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  // CHECK IF APP USING SYSTEM THEME OR USER-CHOSEN THEME USING SHARED PREFERENCE
   void checkTheme() {
     bool? isDarkMode = SharedPreferenceHandler.getIsDarkMode();
 
@@ -33,4 +32,9 @@ class ThemeViewModel extends BaseViewModel {
 
     notifyListeners();
   }
+}
+
+extension ThemeGetter on BuildContext {
+  /// Usage example: `context.theme`
+  ThemeData get theme => Theme.of(this);
 }

@@ -10,7 +10,7 @@ class GradientColorManager {
   static const LinearGradient backgroundGradient = LinearGradient(
     colors: [
       ColorManager.lightBlueColor,
-      ColorManager.whiteColor,
+      ColorManager.primaryColor,
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
